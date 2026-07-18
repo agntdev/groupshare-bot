@@ -3,17 +3,51 @@
     "name": "Upload Files",
     "steps": [
       {
+        "send": { "callback": "upload:start" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Begin file upload process for link creation"
+              "text": "Send me the files you want to share. You can send multiple files one by one.\n\nWhen you're done, tap Done below."
             }
           }
-        ],
-        "send": {
-          "callback": "upload:start"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Upload cancel returns to idle",
+    "steps": [
+      {
+        "send": { "callback": "upload:start" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "callback": "upload:cancel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Upload cancelled." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Upload files done with no files shows error",
+    "steps": [
+      {
+        "send": { "callback": "upload:start" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "callback": "upload:files_done" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "No files added yet. Send at least one file first." }
+          }
+        ]
       }
     ]
   }

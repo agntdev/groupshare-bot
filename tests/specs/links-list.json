@@ -1,19 +1,17 @@
 [
   {
-    "name": "Manage Active Links",
+    "name": "Manage Active Links with no links shows empty state",
     "steps": [
       {
+        "send": { "callback": "links:list" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View and manage all active file links for the group"
+              "text": "No links yet. Upload files to create your first shareable link."
             }
           }
-        ],
-        "send": {
-          "callback": "links:list"
-        }
+        ]
       }
     ]
   }

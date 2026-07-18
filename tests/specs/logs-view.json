@@ -1,19 +1,17 @@
 [
   {
-    "name": "View Access Logs",
+    "name": "View Access Logs with no activity shows empty state",
     "steps": [
       {
+        "send": { "callback": "logs:view" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Display download attempts and success rates"
+              "text": "No download activity yet. Access logs appear here when members use your links."
             }
           }
-        ],
-        "send": {
-          "callback": "logs:view"
-        }
+        ]
       }
     ]
   }
